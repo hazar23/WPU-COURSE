@@ -192,7 +192,7 @@
                 
 
                 ajax: {
-                    "url": '{{ URL('path/dataTable') }}',
+                    "url": '{{ URL('jalur/dataTable') }}',
                     "headers": {
                         "X-CSRF-TOKEN": "{{ csrf_token() }}",
                     },                    
@@ -215,7 +215,7 @@
                     headers: {
                         "X-CSRF-TOKEN": "{{ csrf_token() }}",
                     },
-                    url: "{{ URL('path/insert') }}",
+                    url: "{{ URL('jalur/insert') }}",
                     type: "POST",
                     data: new FormData(this),
                     processData:false,
@@ -263,7 +263,7 @@
                     headers: {
                         "X-CSRF-TOKEN": "{{ csrf_token() }}",
                     },
-                    url: "{{ URL('path/edit') }}",
+                    url: "{{ URL('jalur/edit') }}",
                     type: "GET",
                     data: 'id=' + id,
                     dataType: "JSON",
@@ -293,7 +293,7 @@
                     headers: {
                         "X-CSRF-TOKEN": "{{ csrf_token() }}",
                     },
-                    url: "{{ URL('path/update') }}",
+                    url: "{{ URL('jalur/update') }}",
                     type: "POST",
                     data: new FormData(this),
                     processData:false,
@@ -351,7 +351,7 @@
                             headers: {
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
                             },
-                            url: '{{ URL('path/delete') }}',
+                            url: '{{ URL('jalur/delete') }}',
                             type: 'DELETE',
                             data: "id=" + id,
                             dataType: 'json',

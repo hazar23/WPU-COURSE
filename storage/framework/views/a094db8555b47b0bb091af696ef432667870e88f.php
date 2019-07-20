@@ -138,13 +138,7 @@
                         return '<center>'+ '<p>'+ temp +'</p>' +'</center>';
                     }                    
                 },                         
-            }; 
-
-            // validasi form 
-            jQuery.validator.setDefaults({
-                debug: true,
-                success: "valid"
-            });            
+            };          
 
             // form tambah
             $( "#form_insert_subject" ).validate({
@@ -197,7 +191,7 @@
                 
 
                 ajax: {
-                    "url": '<?php echo e(URL('subject/dataTable')); ?>',
+                    "url": '<?php echo e(URL('matakuliah/dataTable')); ?>',
                     "headers": {
                         "X-CSRF-TOKEN": "<?php echo e(csrf_token()); ?>",
                     },                    
@@ -220,7 +214,7 @@
                     headers: {
                         "X-CSRF-TOKEN": "<?php echo e(csrf_token()); ?>",
                     },
-                    url: "<?php echo e(URL('subject/insert')); ?>",
+                    url: "<?php echo e(URL('matakuliah/insert')); ?>",
                     type: "POST",
                     data: new FormData(this),
                     processData:false,
@@ -268,7 +262,7 @@
                     headers: {
                         "X-CSRF-TOKEN": "<?php echo e(csrf_token()); ?>",
                     },
-                    url: "<?php echo e(URL('subject/edit')); ?>",
+                    url: "<?php echo e(URL('matakuliah/edit')); ?>",
                     type: "GET",
                     data: 'id=' + id,
                     dataType: "JSON",
@@ -298,7 +292,7 @@
                     headers: {
                         "X-CSRF-TOKEN": "<?php echo e(csrf_token()); ?>",
                     },
-                    url: "<?php echo e(URL('subject/update')); ?>",
+                    url: "<?php echo e(URL('matakuliah/update')); ?>",
                     type: "POST",
                     data: new FormData(this),
                     processData:false,
@@ -356,7 +350,7 @@
                             headers: {
                                 'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
                             },
-                            url: '<?php echo e(URL('subject/delete')); ?>',
+                            url: '<?php echo e(URL('matakuliah/delete')); ?>',
                             type: 'DELETE',
                             data: "id=" + id,
                             dataType: 'json',

@@ -16,12 +16,13 @@ class CreateLessonTable extends Migration
         Schema::create('lesson', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('course_id')->unsigned()->nullable();            
-            $table->string('title')->nullable();
-            $table->string('slug')->nullable();                        
-            $table->string('video_link')->nullable();                        
-            $table->text('content')->nullable();
+            $table->string('title',100)->nullable();
+            $table->string('slug',150)->nullable();                        
+            $table->string('video_link',100)->nullable();                        
+            $table->longText('content')->nullable();
             $table->integer('position')->nullable()->unsigned();
-            $table->string('file')->nullable();                                    
+            $table->string('materi',50)->nullable();                                    
+            $table->string('source_code',50)->nullable();                                    
             $table->tinyInteger('published')->nullable()->default(0);
                 
            $table->timestamps();

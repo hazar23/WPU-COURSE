@@ -19,7 +19,7 @@
     <!-- CDN--> 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" />
     
-
+    <?php echo $__env->yieldContent('heading'); ?>
 </head>
 <body>
 
@@ -93,6 +93,7 @@ $(function() {
 </script>
 <?php $__env->startSection('scripts'); ?>
 <?php echo $__env->yieldSection(); ?>
+<?php echo $__env->yieldContent('scriptss'); ?>
 
 </body>
 </html>

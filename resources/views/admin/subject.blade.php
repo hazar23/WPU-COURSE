@@ -192,7 +192,7 @@
                 
 
                 ajax: {
-                    "url": '{{ URL('subject/dataTable') }}',
+                    "url": '{{ URL('matakuliah/dataTable') }}',
                     "headers": {
                         "X-CSRF-TOKEN": "{{ csrf_token() }}",
                     },                    
@@ -215,7 +215,7 @@
                     headers: {
                         "X-CSRF-TOKEN": "{{ csrf_token() }}",
                     },
-                    url: "{{ URL('subject/insert') }}",
+                    url: "{{ URL('matakuliah/insert') }}",
                     type: "POST",
                     data: new FormData(this),
                     processData:false,
@@ -263,7 +263,7 @@
                     headers: {
                         "X-CSRF-TOKEN": "{{ csrf_token() }}",
                     },
-                    url: "{{ URL('subject/edit') }}",
+                    url: "{{ URL('matakuliah/edit') }}",
                     type: "GET",
                     data: 'id=' + id,
                     dataType: "JSON",
@@ -293,7 +293,7 @@
                     headers: {
                         "X-CSRF-TOKEN": "{{ csrf_token() }}",
                     },
-                    url: "{{ URL('subject/update') }}",
+                    url: "{{ URL('matakuliah/update') }}",
                     type: "POST",
                     data: new FormData(this),
                     processData:false,
@@ -351,7 +351,7 @@
                             headers: {
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
                             },
-                            url: '{{ URL('subject/delete') }}',
+                            url: '{{ URL('matakuliah/delete') }}',
                             type: 'DELETE',
                             data: "id=" + id,
                             dataType: 'json',

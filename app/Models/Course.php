@@ -35,4 +35,8 @@ class Course extends Model
         
         return $this->belongsTo('App\Models\Level', 'level_id', 'id');
     }
+    public function lesson()
+    {
+        return $this->hasOne('App\Models\Course', 'course_id', 'id');
+    }
 }

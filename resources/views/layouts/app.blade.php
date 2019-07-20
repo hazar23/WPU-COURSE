@@ -19,7 +19,7 @@
     <!-- CDN--> 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" />
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css" rel="stylesheet">  --}}
-
+    @yield('heading')
 </head>
 <body>
 
@@ -93,6 +93,7 @@ $(function() {
 </script>
 @section('scripts')
 @show
+@yield('scriptss')
 
 </body>
 </html>

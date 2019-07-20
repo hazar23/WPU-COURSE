@@ -37,7 +37,7 @@ class LessonController extends Controller
 
     public function datatable()
     {
-        $data = Lesson::get();
+        $data = Lesson::with('course')->get();        
             
         return DataTables::of($data)
         ->addIndexColumn()
@@ -68,22 +68,25 @@ class LessonController extends Controller
         $title = $request->title;
         $slug = str_slug($title, "-");
         $video_link = $request->video_link;
-        $file = $request->file;
-        $content = 1;
+        $materi = $request->materi;
+        $source_code = $request->source_code;
+        $content = $request->content;        
         $published = $request->checked;        
         
         
         if ($course_title == null || $title == null || $content == null) {
             return response()->json(['status' => 400, 'msg' => "Maaf, inputan tidak boleh kosong."]);
           
-        }else if ($file != null) {
+        }else if ($materi != null) {
             
             $course = Course::where('title',$course_title)->first();
             $lesson = Lesson::where('course_id',$course->id)->max('position');        
             $position = $lesson + 1;
             
-            $fileName =time().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path('file'), $fileName);
+            $materiName =time().'.'.$materi->getClientOriginalExtension();
+            $materi->move(public_path('file'), $materiName);
+            $scodeName =time().'.'.$source_code->getClientOriginalExtension();
+            $source_code->move(public_path('file'), $scodeName);
             
             $data = [
                 "course_id" => $course->id,
@@ -92,7 +95,8 @@ class LessonController extends Controller
                 "video_link" => $video_link,
                 "content" => $content,
                 "position" => $position,
-                "file" => $fileName,
+                "materi" => $fileName,
+                "source_code" => $scodeName,
                 "published" => $published   
             ];
             
@@ -107,8 +111,7 @@ class LessonController extends Controller
                 "slug" => $slug,
                 "video_link" => $video_link,
                 "content" => $content,
-                "position" => $position,
-                "file" => $file,
+                "position" => $position,                
                 "published" => $published   
             ];
         }
@@ -151,7 +154,9 @@ class LessonController extends Controller
             'title' => $lesson->title,
             'position' => $lesson->position,
             'video_link' => $lesson->video_link,
-            'file' => $lesson->file,
+            'content' => $lesson->content,
+            'materi' => $lesson->materi,
+            'source_code' => $lesson->source_code,
             'published' => $lesson->published
         ];
         
@@ -173,15 +178,16 @@ class LessonController extends Controller
         $slug = str_slug($title, "-");
         $video_link = $request->video_link;
         $position = $request->position;
-        $file = $request->file;
-        $content = 1;
+        $materi = $request->materi;
+        $source_code = $request->source_code;
+        $content = $request->content;
         $published = $request->checked;        
         
         
         if ($course_title == null || $title == null || $content == null) {
             return response()->json(['status' => 400, 'msg' => "Maaf, inputan tidak boleh kosong."]);
           
-        }else if ($file != null) {
+        }else if ($maeri != null) {
 
             $course = Course::where('title',$course_title)->first();
             $lesson = Lesson::where('id',$id)->first();
@@ -199,7 +205,7 @@ class LessonController extends Controller
                 "video_link" => $video_link,
                 "content" => $content,
                 "position" => $position,
-                "file" => $fileName,
+                "materi" => $fileName,
                 "published" => $published   
             ];
             

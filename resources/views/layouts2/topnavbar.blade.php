@@ -12,12 +12,24 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="page-scroll" href="#page-top">Beranda</a></li>
-                    <li><a class="page-scroll" href="#features">Features</a></li>
-                    <li><a class="page-scroll" href="#team">Team</a></li>
-                    <li><a class="page-scroll" href="#testimonials">Testimonials</a></li>
-                    <li><a class="page-scroll" href="#pricing">Pricing</a></li>
-                    <li><a class="page-scroll" href="#contact">Contact</a></li>
+                    @if (Request::path() == '/')
+                    <li><a class="page-scroll" href="#page-top">Beranda</a></li>    
+                    @else
+                    <li><a class="page-scroll" href={{url('/')}}>Beranda</a></li>   
+                    @endif                    
+
+                    <li><a class="page-scroll" href={{url('/belajar')}}>Belajar</a></li>
+                    @if (Session::has('email'))
+                    @php
+                        $value = App\Models\User::where('email', Session::get('email'))->first();                                
+                    @endphp
+                    <li><a data-id="{{$value->id}}" id="btn-profile" data-toggle="modal" data-target="#profile">Profile</a></li>
+                    <li><a href="{{ route('keluar') }}">Keluar</a></li>    
+                    @else
+                    <li><a class="page-scroll" href="#masuk" data-toggle="modal" data-target="#masuk">Masuk</a></li>
+                    <li><a class="page-scroll" href="#daftar" data-toggle="modal" data-target="#daftar">Daftar</a></li>                        
+                    @endif
+                    
                 </ul>
             </div>
         </div>

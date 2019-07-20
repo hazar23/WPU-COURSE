@@ -366,15 +366,7 @@
                     }
                 });
             });
-            
-            //cekbox pada modal ubah
-            $('#upd_published').change(function(){                
-                if($('#upd_published:checked').val()){                    
-                    $('#upd_checked').val(1);
-                }else{                    
-                    $('#upd_checked').val(0);
-                }
-            });
+                        
 
             //fungsi get data pada modal ubah
             table.on('click', '.btn-edit', function (e) {
@@ -395,10 +387,10 @@
                         $('#upd_subject').val(data.list.subject_id);
                         $('#upd_path').val(data.list.path_id);
                         $('#upd_level').val(data.list.level_id);
-                        if (data.list.published > 0) {
-                            $('#upd_published').attr('checked', true);    
-                        }else{
-                            $('#upd_published').attr('checked', false);    
+                        if (data.list.published > 0) {                            
+                            $('input[name="published"]').prop('checked', true);    
+                        }else{                            
+                            $('input[name="published"]').prop('checked', false);    
                         }
                         $('#upd_checked').val(data.list.published);
                         $('#update_course').modal('show');
@@ -407,6 +399,17 @@
                         alert(status + " : " + error);
                     }
                 });
+            });
+
+            //cekbox pada modal ubah
+            $('#upd_published').change(function(){                
+                if($('input[name="published"]').attr('checked', false)){                    
+                    alert('kosong');
+                    $('#upd_checked').val(0);
+                }else if($('input[name="published"]').attr('checked', true)){                    
+                    alert('ada');
+                    $('#upd_checked').val(1);
+                }
             });
 
             //fungsi ubah data

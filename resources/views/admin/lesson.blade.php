@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('title', 'Lesson')
+@section('heading')
+{!! editor_css() !!}
+@endsection
 @section('content')
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -47,7 +50,7 @@
                     <div class="modal-body">
                         <div class="form_insert">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="ins_course">Course</label>
                                             <input type="text" placeholder="item..." class="course form-control" name="course_title" />
@@ -70,21 +73,21 @@
                                                 </span>
                                     </div>
                                     <div class="form-group">
-                                            <label for="ins_file">File Materi</label>
-                                                <input type="file" placeholder="" class="form-control" id="ins_file" name="file"/>
+                                            <label for="ins_materi">Materi (pdf)</label>
+                                                <input type="file" placeholder="" class="form-control" id="ins_materi" name="materi"/>
                                                     <span class="text-danger">
-                                                        <strong id="file-error"></strong>
+                                                        <strong id="materi-error"></strong>
                                                     </span>
-                                    </div>                                                                                                                                                                                                                                                                                                                       
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ins_code">Source Code</label>
+                                            <input type="file" placeholder="" class="form-control" id="ins_code" name="source_code"/>
+                                                <span class="text-danger">
+                                                    <strong id="code-error"></strong>
+                                                </span>
+                                </div>                                                                                                                                                                                                                                                                                                                       
                                     <label> <input type="checkbox" name="published" class="i-checks" id="ins_published" value="0"> Published </label>
                                     <input type="hidden" class="i-checks" name="checked" id="checked" value="0"></label> 
-                                </div>
-
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label for="ins_content">Materi</label>
-                                            <textarea id="content" name="editordata"></textarea>
-                                    </div> 
                                 </div>
                             </div>                                                                                                                                               
                         </div>
@@ -100,7 +103,7 @@
 
     {{-- update lesson --}}
     <div class="modal fade" id="update_lesson" tabindex="-1" role="dialog" aria-labelledby="modalbarang">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content ">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span
@@ -111,7 +114,7 @@
                     <div class="modal-body">
                         <input type="hidden" name="id" id="id">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="upd_course">Course</label>
                                         <input type="text" placeholder="item..." id="course" class="course form-control" name="course_title" />
@@ -141,11 +144,19 @@
                                             </span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="upd_file">File Materi</label>
-                                        <input type="file" placeholder="" class="form-control" id="upd_file" name="file"/>
-                                        <p id="file"></p>
+                                    <label for="upd_materi">Materi (pdf)</label>
+                                        <input type="file" placeholder="" class="form-control" id="upd_file" name="materi"/>
+                                        <p id="materi"></p>
                                             <span class="text-danger">
-                                                <strong id="file-error"></strong>
+                                                <strong id="materi-error"></strong>
+                                            </span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="upd_code">Source Code</label>
+                                        <input type="file" placeholder="" class="form-control" id="upd_code" name="source_code"/>
+                                        <p id="code"></p>
+                                            <span class="text-danger">
+                                                <strong id="code-error"></strong>
                                             </span>
                                 </div>
                                 <div>
@@ -153,13 +164,7 @@
                                 </div>                                                                                                                                                                                                                                                                                                                       
                                 <label> <input type="checkbox" name="published" class="i-checks" id="upd_published" value="0"/> Published </label>
                                 <input type="text" class="i-checks" name="checked" id="upd_checked" value="0"/>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label for="upd_content">Materi</label>
-                                        <textarea id="content" name="editordata"></textarea>
-                                </div> 
-                            </div>
+                            </div>                            
                             </div>                                                                                                                                            
                     </div>
                     <div class="modal-footer">
@@ -169,14 +174,13 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div>    
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
     <script>
         $(document).ready(function () {            
             var styles = {
                 button: function (row, type, data) {
-                    return `<center>` + `<a href="#" data-toggle="modal" data-target="#update_lesson" class="btn btn-success btn-circle btn-edit" id="${data.id}"><i class="fa fa-pencil-alt"></i></a>
+                    return `<center>` + `<a href="#" data-toggle="modal" data-target="#update_lesson" class="btn btn-success btn-circle btn-edit" id="${data.id}"><i class="fas fa-pencil-alt"></i></a>
                             <a href="#" class="btn btn-danger btn-circle btn-delete" id="${data.id}"><i class="fa fa-trash"></i></a>
                             <a href="#" class="btn btn-primary btn-circle btn-delete" id="${data.id}"><i class="fa fa-eye"></i></a>` + `</center>`;
                 },                
@@ -189,7 +193,39 @@
                 }                
             }; 
 
-            $('#content').ckeditor();
+            $('#insert_lesson').on('show.bs.modal', function(event){                
+                var modal = $(this);
+                modal.find('.modal-body:last-child').remove();
+                modal.find('.modal-body').append("<div id='editormateri'> </div>");
+                let fy = editormd({
+                id : "editormateri",
+                width : "100%",
+                height : "640",
+                saveHTMLToTextarea : true,
+                emoji : true,
+                taskList : true,
+                tex : false,
+                toc : true,
+                tocm : false,
+                codeFold : true,
+                flowChart: false,
+                sequenceDiagram: false,
+                path : "/vendor/editor.md/lib/",
+                imageUpload : true,
+                markdown: "",
+                // imageFormats : ["jpg","gif","png"],
+                // imageUploadURL : "/xetaravel-editor-md/upload/picture?_token=7CvEmBa20ME2us4BG5pP9PXSWj2Np6iI3EdMzFiP&from=xetaravel-editor-md",
+                toolbarIcons : function() {                   
+                    return [
+                        "undo", "redo", "|", 
+                        "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|", 
+                        "h1", "h2", "h3", "h4", "h5", "h6", "|", 
+                        "list-ul", "list-ol", "hr", "|",
+                        "link", "image", "code", "preformatted-text", "table", "|", "watch", "preview", "fullscreen", "search"
+                    ]
+                },});
+                modal.find('.modal-content form textarea[name="editormateri-markdown-doc"]').attr('name', 'content');
+            });
             
             // form tambah
             $( "#form_insert_lesson" ).validate({
@@ -203,11 +239,17 @@
                     video_link: {
                     required: true
                     },
-                    file: {                    
+                    materi: {                                        
+                    extension: "pdf"
+                    },
+                    source_code: {                    
                     extension: "zip"
                     },
                     published: {
                     required: false
+                    },
+                    content: {
+                    required: true
                     }
                 }
             });
@@ -215,17 +257,26 @@
              // form tambah
              $( "#form_update_course" ).validate({
                 rules: {
-                    image: {
-                    required: false,                    
+                    course_title: {
+                    required: true                    
                     },
                     title: {
                     required: true
                     },
-                    description: {
+                    video_link: {
                     required: true
+                    },
+                    materi: {                                        
+                    extension: "pdf"
+                    },
+                    source_code: {                    
+                    extension: "zip"
                     },
                     published: {
                     required: false
+                    },
+                    content: {
+                    required: true
                     }
                 }
             });            
@@ -247,7 +298,7 @@
 
                 columns: [
                     {data: 'DT_RowIndex'},
-                    {data: 'course_id'},                    
+                    {data: 'course.title'},                    
                     {data: 'title'},                                        
                     {data: 'position'},
                     {data: 'published', render:styles.checkbox},
@@ -338,13 +389,45 @@
                         $('#course').val(data.list.course);
                         $('#upd_video_link').val(data.list.video_link);
                         $('#upd_position').val(data.list.position);
-                        $('#file').html(data.list.file);                        
+                        $('#upd_materi').html(data.list.materi);                        
+                        $('#upd_code').html(data.list.source_code);                        
                         if (data.list.published > 0) {
                             $('#upd_published').attr('checked', true);                               
                         }else{
                             $('#upd_published').attr('checked', false);    
                         }                        
                         $('#upd_checked').val(data.list.published); 
+                        $('#update_lesson .modal-body:last-child').remove();
+                        $('#update_lesson .modal-body').append("<div id='editormateri'> </div>");
+                        editormd({
+                        id : "editormateri",
+                        width : "100%",
+                        height : "640",
+                        saveHTMLToTextarea : true,
+                        emoji : true,
+                        taskList : true,
+                        tex : false,
+                        toc : true,
+                        tocm : false,
+                        codeFold : true,
+                        flowChart: false,
+                        sequenceDiagram: false,
+                        path : "/vendor/editor.md/lib/",
+                        imageUpload : true,
+                        markdown:data.list.content,
+                        imageFormats : ["jpg","gif","png"],
+                        imageUploadURL : "/xetaravel-editor-md/upload/picture?_token=7CvEmBa20ME2us4BG5pP9PXSWj2Np6iI3EdMzFiP&from=xetaravel-editor-md",
+                        toolbarIcons : function() {                   
+                            return [
+                                "undo", "redo", "|", 
+                                "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|", 
+                                "h1", "h2", "h3", "h4", "h5", "h6", "|", 
+                                "list-ul", "list-ol", "hr", "|",
+                                "link", "image", "code", "preformatted-text", "table", "|", "watch", "preview", "fullscreen", "search"
+                            ]
+                        },});
+                        $('#update_lesson .modal-content form textarea[name="editormateri-markdown-doc"]').attr('name', 'content');
+                        
                         $('#update_lesson').modal('show');
                     },
                     error: function (xhr, status, error) {
@@ -457,4 +540,7 @@
         
     </script>
 
+@endsection
+@section('scriptss')
+{!! editor_js() !!}
 @endsection

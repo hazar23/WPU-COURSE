@@ -1,21 +1,34 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        return view('siswa/home');
+        // $this->middleware('auth');
     }
 
-    public function dashboard(Request $request)
-    {
-        if ($request->session()->has('email')) {
-            return view('dashboard/index');
-        }else{
-            return redirect('/login');
-        }
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {   
+        $data['terbaru'] = Course::orderBy('id', 'desc')->take(4)->get();
+        return view('siswa/home',$data);
+    }
+    public function dashboard()
+    {   
+        
+        return view('dashboard/index');
     }
 }

@@ -18,10 +18,10 @@ class CreateCourseTable extends Migration
             $table->integer('subject_id')->unsigned()->nullable();
             $table->integer('path_id')->unsigned()->nullable();
             $table->integer('level_id')->unsigned();
-            $table->string('title');
-            $table->string('slug')->nullable();
+            $table->string('title',100);
+            $table->string('slug',150)->nullable();
             $table->text('description')->nullable();            
-            $table->string('image')->nullable();            
+            $table->string('image',50)->nullable();            
             $table->tinyInteger('published')->nullable()->default(0);
                 
             $table->timestamps();

@@ -24,5 +24,11 @@ class Lesson extends Model
     protected $table = "lesson";
     protected $primaryKey = "id";
     protected $dates = ['deleted_at'];
-    protected $fillable = ['course_id','title','slug','video_link','position','content','file','published'];
+    protected $fillable = ['course_id','title','slug','video_link','position','content','materi','source_code','published'];
+    
+    public function course()
+    {
+        return $this->belongsTo('App\Models\Course','course_id', 'id');        
+    }
+    
 }

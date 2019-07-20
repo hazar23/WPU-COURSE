@@ -12,12 +12,24 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="page-scroll" href="#page-top">Beranda</a></li>
-                    <li><a class="page-scroll" href="#features">Features</a></li>
-                    <li><a class="page-scroll" href="#team">Team</a></li>
-                    <li><a class="page-scroll" href="#testimonials">Testimonials</a></li>
-                    <li><a class="page-scroll" href="#pricing">Pricing</a></li>
-                    <li><a class="page-scroll" href="#contact">Contact</a></li>
+                    <?php if(Request::path() == '/'): ?>
+                    <li><a class="page-scroll" href="#page-top">Beranda</a></li>    
+                    <?php else: ?>
+                    <li><a class="page-scroll" href=<?php echo e(url('/')); ?>>Beranda</a></li>   
+                    <?php endif; ?>                    
+
+                    <li><a class="page-scroll" href=<?php echo e(url('/belajar')); ?>>Belajar</a></li>
+                    <?php if(Session::has('email')): ?>
+                    <?php
+                        $value = App\Models\User::where('email', Session::get('email'))->first();                                
+                    ?>
+                    <li><a data-id="<?php echo e($value->id); ?>" id="btn-profile" data-toggle="modal" data-target="#profile">Profile</a></li>
+                    <li><a href="<?php echo e(route('keluar')); ?>">Keluar</a></li>    
+                    <?php else: ?>
+                    <li><a class="page-scroll" href="#masuk" data-toggle="modal" data-target="#masuk">Masuk</a></li>
+                    <li><a class="page-scroll" href="#daftar" data-toggle="modal" data-target="#daftar">Daftar</a></li>                        
+                    <?php endif; ?>
+                    
                 </ul>
             </div>
         </div>

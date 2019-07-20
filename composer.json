@@ -12,7 +12,9 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
+        "parsedown/laravel": "^1.1",
         "unisharp/laravel-ckeditor": "^4.7",
+        "xetaio/xetaravel-editor-md": "^1.0",
         "yajra/laravel-datatables": "^1.0"
     },
     "require-dev": {

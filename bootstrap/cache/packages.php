@@ -71,6 +71,13 @@
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
+  'parsedown/laravel' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Parsedown\\Providers\\ParsedownServiceProvider',
+    ),
+  ),
   'yajra/laravel-datatables-buttons' => 
   array (
     'providers' => 

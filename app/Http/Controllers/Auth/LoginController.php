@@ -59,17 +59,61 @@ class LoginController extends Controller
             $pass = Crypt::decryptString($cek->password);
             if ($pass == $password) {
                 $request->session()->put('email', $email);
-                return response()->json(['status' => 202, 'msg' => "Login, Berhasil."]);                
-            }            
+                return response()->json(['status' => 202, 'msg' => "Login, Berhasil."]);                                
+            }else{
+                return response()->json(['status' => 400, 'msg' => "Maaf, Email atau Password salah."]);
+            }         
         }
         return response()->json(['status' => 400, 'msg' => "Maaf, Email atau Password salah."]);
        
+    }
+    public function daftar(Request $request){
+        $name = $request->username;
+        $email = $request->email;
+        $password = $request->password;
+        $image = "titikkoma.png";        
+        
+        $cek_email = User::where('email', $email)->first();        
+        if (!empty($cek_email)) {
+            return response()->json(['status' => 400, 'msg' => "Maaf, Email sudah di gunakan."]);
+        }
+        if (empty($name)||empty($password) || empty($email)){
+            return response()->json(['status' => 400, 'msg' => "Maaf, inputan tidak boleh kosong."]);
+          
+        }else{            
+            
+            $data = [
+                "name" => $name,
+                "email" => $email,
+                "image" => $image,
+                "password" =>Crypt::encryptString($password)
+            ]; 
+
+            $insert = User::create($data);
+                                 
+
+        if ($insert) {
+            return response()->json(['status' => 202,'msg' => 'Data berhasil ditambahkan']);
+        } else {
+            return response()->json(['status' => 449,'msg' => 'Data gagal ditambahkan']);
+        }
+            
+        }
+
+
     }
     public function logout(Request $request){
         
         $request->session()->flush();
 
         return redirect('/login');
+    }
+
+    public function keluar(Request $request){
+        
+        $request->session()->flush();        
+
+        return redirect('/');
     }
 
 }

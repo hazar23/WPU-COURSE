@@ -8,9 +8,23 @@
     <link rel="stylesheet" href="<?php echo asset('css/bootstrap.min.css'); ?>" />
     <link rel="stylesheet" href="<?php echo asset('css/animate.css'); ?>" />
     <link rel="stylesheet" href="<?php echo asset('css/style.css'); ?>" />        
+    <link rel="stylesheet" href="<?php echo asset('css/plugins/sweetalert.css'); ?>" />    
+
     <!-- CDN--> 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" />
 
+    <style>
+        @media (max-width: 768px){
+        .video{
+            background-color: #2C3E50;
+            padding-top: 80px;
+        }
+        .video .iframe iframe{
+            width: 100%;
+            height: 400px;
+        }
+        }
+    </style>
 </head>
 <body id="page-top" class="landing-page no-skin-config">
 
@@ -25,11 +39,13 @@
 
 
 <script src="<?php echo asset('js/app.js'); ?>" type="text/javascript"></script>
-<script src="<?php echo asset('js/jquery-3.1.1.min.js'); ?>"></script>
-<script src="<?php echo asset('js/bootstrap.min.js'); ?>"></script>
+
+
 <script src="<?php echo asset('js/plugins/jquery.metisMenu.js'); ?>"></script>
 <script src="<?php echo asset('js/plugins/jquery.slimscroll.min.js'); ?>"></script>
-
+<script src="<?php echo asset('js/plugins/sweetalert.min.js'); ?>"></script>
+<script src="<?php echo asset('js/plugins/jquery.validate.min.js'); ?>"></script>
+<script src="<?php echo asset('js/plugins/responsible-video.js'); ?>"></script>
 
 <!-- Custom and plugin javascript -->
 <script src="<?php echo asset('js/inspinia.js'); ?>" ></script>

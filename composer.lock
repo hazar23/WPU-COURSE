@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e1009a4f8ce88e75076a8d47dcde5728",
+    "content-hash": "fec87e269aea1ea6f48e261bb0c1b655",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1863,6 +1863,63 @@
                 "random"
             ],
             "time": "2018-07-02T15:55:56+00:00"
+        },
+        {
+            "name": "parsedown/laravel",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/parsedown/laravel.git",
+                "reference": "a1dd13b4c4309be3f48c9ceb02e3a29ba81548b0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/parsedown/laravel/zipball/a1dd13b4c4309be3f48c9ceb02e3a29ba81548b0",
+                "reference": "a1dd13b4c4309be3f48c9ceb02e3a29ba81548b0",
+                "shasum": ""
+            },
+            "require": {
+                "erusev/parsedown": "~1.6",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.4",
+                "php": ">=7.1",
+                "phpunit/phpunit": "^6.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Parsedown\\Providers\\ParsedownServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Support/helpers.php"
+                ],
+                "psr-4": {
+                    "Parsedown\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eduardo Agostini",
+                    "email": "edu.agostini@gmail.com"
+                }
+            ],
+            "description": "Official Laravel Wrapper of Parsedown.",
+            "homepage": "http://parsedown.org",
+            "keywords": [
+                "laravel",
+                "parsedown"
+            ],
+            "time": "2018-01-09T22:08:08+00:00"
         },
         {
             "name": "php-http/guzzle6-adapter",
@@ -4089,6 +4146,59 @@
                 "environment"
             ],
             "time": "2019-01-29T11:11:52+00:00"
+        },
+        {
+            "name": "xetaio/xetaravel-editor-md",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/XetaIO/Xetaravel-Editor-md.git",
+                "reference": "8d76c02a6cf39fff8774394280042bb339eda9bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/XetaIO/Xetaravel-Editor-md/zipball/8d76c02a6cf39fff8774394280042bb339eda9bc",
+                "reference": "8d76c02a6cf39fff8774394280042bb339eda9bc",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^5.0",
+                "php": "^7.1.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Xetaio\\Editor\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "raoyc",
+                    "email": "raoyc2009@gmail.com"
+                },
+                {
+                    "name": "Xety",
+                    "email": "emeric@xeta.io",
+                    "homepage": "https://github.com/Xety"
+                }
+            ],
+            "description": "A wrapper to use Editor.md with Laravel.",
+            "homepage": "https://github.com/XetaIO/Xetaravel-Editor-md",
+            "keywords": [
+                "editor.md",
+                "laravel",
+                "laravel-5-package",
+                "markdown",
+                "wysiwyg"
+            ],
+            "time": "2019-02-03T08:49:58+00:00"
         },
         {
             "name": "yajra/laravel-datatables",
