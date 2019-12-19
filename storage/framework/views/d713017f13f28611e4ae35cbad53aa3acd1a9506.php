@@ -37,7 +37,7 @@
                         <div class="form-group">
                             <input type="password" name="password" class="form-control" placeholder="Password" required="">
                         </div>
-                        <button type="submit" class="btn btn-primary block full-width m-b login">Login</button>                                    
+                        <button type="button" class="btn btn-primary block full-width m-b btn-login">Login</button>                                    
                 </form>                        
             </div>
             <p>Belum punya akun? <a href="#daftar" data-toggle="modal" data-target="#daftar">Daftar di sini</a></p>
@@ -47,19 +47,13 @@
     <!-- Mainly scripts -->    
     <script src="<?php echo asset('js/jquery-3.1.1.min.js'); ?>"></script>
     <script src="<?php echo asset('js/bootstrap.min.js'); ?>"></script>
-
-</body>
-
-</html>
-
-
-
+    <script src="<?php echo asset('js/plugins/sweetalert.min.js'); ?>"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>        
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 <script>
-     $(document).ready(function(){   
+    $(document).ready(function(){   
                   
              // form tambah
              $( "#form-masuk" ).validate({
@@ -82,10 +76,9 @@
             });
     
             //fungsi login
-            $(".login").submit(function (e) {                
+            $(".btn-login").click(function (e) {                
                     e.preventDefault();                           
-                    var form = $('#form-masuk').serialize();   
-                    alert("hello");                                    
+                    var form = $('#form-masuk').serialize();                                                    
                     $.ajax({
                         headers: {
                             "X-CSRF-TOKEN": "<?php echo e(csrf_token()); ?>",
@@ -102,7 +95,7 @@
                                 type: "success",
                                 timer:2000,
                                 });
-                                // document.location.assign("<?php echo e(URL('/')); ?>");     
+                                document.location.assign("<?php echo e(URL('/dashboard')); ?>");     
                                 $("#masuk").modal('hide');
                                 setTimeout(function () {
                                     location.reload();
@@ -129,4 +122,7 @@
                     });
                 });
         });
-<script>
+    </script>
+</body>
+
+</html>

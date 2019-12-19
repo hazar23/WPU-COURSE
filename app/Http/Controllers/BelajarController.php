@@ -12,12 +12,19 @@ class BelajarController extends Controller
 {
     public function index()
     {        
-        $data['matakuliah']= Subject::paginate(4,['*'],'page_2s');
+        $data['matakuliah']= Subject::paginate(4,['*'],'page_2s');    
         $data['jalur']= Path::paginate(4,['*'],'page_1s');        
         $data['level']= Level::get();                
         return view('siswa/belajar', $data);
     }
     
+    public function all(Request $request)
+    {                           
+        $data['title']= "Semua Materi";
+        $data['list']= Course::with('tags')->where('published',1)->paginate(12);                                
+        return view('siswa/listMateri', $data);
+    }
+
     public function matakuliah(Request $request)
     {                   
         $matkul = Subject::where('slug',$request->slug)->first();
@@ -44,17 +51,14 @@ class BelajarController extends Controller
 
     public function materi(Request $request)
 {   
-        $id = $request->id;
-        // var_dump($id);die;
+        $id = $request->id;        
         if ($request->session()->has('email')) {
         
-        $course = Course::where('id',$id)->first();            
+        $course = Course::with('tags')->where('id',$id)->first();            
         
         $data['materi']= Lesson::where('course_id',$course->id)->where('published',1)->first();                        
         $data['list']= Lesson::where('course_id',$course->id)->where('published',1)->get();                       
         
-        // var_dump($data);die;
-        // return view('siswa/materi',$data);
             return response()->json(['status' => 202,'msg' => 'berhasil','list'=>$data]);
         }else{
             return response()->json(['status' => 404,'msg' => 'Harus Login terlebih dahulu']);
@@ -67,8 +71,7 @@ class BelajarController extends Controller
             
             $data['materi']= Lesson::where('course_id',$course->id)->where('published',1)->first();                        
             $data['list']= Lesson::where('course_id',$course->id)->where('published',1)->get();                       
-            
-            // var_dump($data);die;
+                        
             return view('siswa/materi',$data);
             
         }
@@ -79,6 +82,19 @@ class BelajarController extends Controller
         $data['list']= Lesson::where('course_id',$lesson->course_id)->where('published',1)->get();               
 
         return view('siswa/materi',$data);
+    }
+    public function download(Request $request){
+        
+        $file = $request->all();
+        var_dump($file);die;
+        //PDF file is stored under project/public/download/info.pdf
+        $alamat= public_path('file').$file;
+
+        $headers = array(
+                'Content-Type: application/pdf',
+                );
+
+        return Response::download($file, 'filename.pdf', $headers);
     }
 }
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Models\Course;
 use App\Models\Subject;
+use App\Models\Tag;
 use App\Models\Path;
 use App\Models\Level;
 use Yajra\DataTables\DataTables;
@@ -21,7 +22,7 @@ class CoursesController extends Controller
     {   
         if ($request->session()->has('email')) {
             $data['title'] = "Kelola Course";
-
+            $data['tag'] = Tag::get();
             $data['subject'] = Subject::get();
             $data['path'] = Path::get();
             $data['level'] = Level::get();        
@@ -65,6 +66,7 @@ class CoursesController extends Controller
         $subject_id = $request->subject;        
         $path_id = $request->path;                
         $level_id = $request->level;
+        $tag = $request->tag;        
         $published = $request->checked;
         
         if (empty($title) || empty($description) || $image == null){
@@ -80,9 +82,7 @@ class CoursesController extends Controller
             }
             if ($path_id == 0) {
                 $path_id = null;
-            }
-
-            // dd($subject_id);die;
+            }            
             $data = [
                 "image" => $imageName,
                 "title" => $title,
@@ -95,6 +95,7 @@ class CoursesController extends Controller
             ];
         
         $insert = Course::create($data);
+        $insert2 = $insert->tags()->attach($tag);
         
         if ($insert) {
             return response()->json(['status' => 202,'msg' => 'Data berhasil ditambahkan']);
@@ -128,7 +129,7 @@ class CoursesController extends Controller
     {
         $id = $request->id;
         
-        $getData = Course::findOrFail($id);
+        $getData = Course::with('tags')->findOrFail($id);
         
         return response()->json(['status' => 202,'list' => $getData]);
     }
@@ -149,7 +150,8 @@ class CoursesController extends Controller
         $description = $request->description;
         $subject_id = $request->subject;
         $path_id = $request->path;
-        $level_id = $request->level;        
+        $level_id = $request->level; 
+        $tag = $request->tag;          
         $published = $request->checked;
 
         $course = Course::where('id',$id)->first();
@@ -196,7 +198,7 @@ class CoursesController extends Controller
             ];                                
         }
         $update = Course::findOrFail($id)->update($data);
-
+        $update2 = Course::findOrFail($id)->tags()->sync($tag);
             if ($update) {
                 return response()->json(['status' => 202,'msg' => 'Data berhasil diubah']);
             } else {

@@ -100,7 +100,20 @@
                                                     @endforelse
                                                 </select>
                                         </div>
-                                    </div>                                     
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ins_url" >Tag</label>                                    
+                                        <select name="tag[]" id="tag" data-placeholder="Pilih tag..." multiple class="form-control">
+                                            @forelse($tag as $tags)
+                                            <option value="{!! $tags->id !!}">{!! $tags->title !!}</option>
+                                            @empty
+                                            <option value="" disabled>Tag Belum Dibuat</option>
+                                            @endforelse                                      
+                                          </select>
+                                        <span class="text-danger">
+                                            <strong id="url-error"></strong>
+                                        </span>
+                                </div>                                                                 
                             </div>        
                             <label> <input type="checkbox" name="published" class="i-checks" id="ins_published" value="0"> Diterbitkan </label>
                             <input type="hidden" class="i-checks" name="checked" id="checked" value="0"></label>                                                                                                                    
@@ -181,7 +194,20 @@
                                                     @endforelse
                                                 </select>
                                         </div>
-                                    </div>                                     
+                                    </div> 
+                                    <div class="form-group">
+                                        <label for="upd_url" >Tag</label>                                    
+                                        <select name="tag[]" id="upd_tag" data-placeholder="Pilih tag..." multiple class="form-control">
+                                            @forelse($tag as $tags)
+                                            <option value="{!! $tags->id !!}">{!! $tags->title !!}</option>
+                                            @empty
+                                            <option value="" disabled>Tag Belum Dibuat</option>
+                                            @endforelse                                      
+                                          </select>
+                                        <span class="text-danger">
+                                            <strong id="url-error"></strong>
+                                        </span>
+                                </div>                                                                
                         </div>                         
                         <label> <input type="checkbox" name="published" class="i-checks" id="upd_published" value="0"> Diterbitkan </label>
                         <input type="text" class="i-checks" name="checked" id="upd_checked" value="0"></label>                                                                                                                                             
@@ -224,6 +250,8 @@
                 }                
             };        
 
+            $('#tag').chosen({width: "100%"});
+            $('#upd_tag').chosen({width: "100%"});
             // form tambah
             $( "#form_insert_course" ).validate({
                 rules: {
@@ -393,6 +421,15 @@
                             $('input[name="published"]').prop('checked', false);    
                         }
                         $('#upd_checked').val(data.list.published);
+                        
+                        var tags = data.list.tags;                                                
+                        var tagarr=[];
+                        tags.forEach(tag => {
+                            tagarr.push(tag.id);                            
+                        });
+                        
+                        $("#upd_tag").val(tagarr).trigger("chosen:updated");                        
+
                         $('#update_course').modal('show');
                     },
                     error: function (xhr, status, error) {

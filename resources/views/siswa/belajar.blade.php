@@ -42,10 +42,7 @@
                                         <b><h3 class="product-name">{{$mat->title}}</h3></b>
                                         <div class="small m-t-xs">                                            
                                            <p style="color:black">{{str_limit($mat->description, $limit = 70, $end = '...')}}</p> 
-                                        </div>                                   
-                                        <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;">Laravel </span>
-                                        <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;">Laravel </span>
-                                        <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;">Laravel </span>                                 
+                                        </div>                                                                           
                                             <div class="row">
                                                 <div class="col-xs-6">
                                                         <span class="badge " style="padding:5px;"><i class="fas fa-book fa-md"></i> 7 list materi</span>
@@ -90,10 +87,7 @@
                                 <b><h3 class="product-name">{{$jal->title}}</h3></b>
                                 <div class="small m-t-xs">                                            
                                     <p style="color:black">{{str_limit($jal->description, $limit = 70, $end = '...')}}</p> 
-                                </div>                                   
-                                <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;">Laravel </span>
-                                <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;">Laravel </span>
-                                <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;">Laravel </span>                                 
+                                </div>                                                                   
                                     <div class="row">
                                         <div class="col-xs-6">
                                                 <span class="badge " style="padding:5px;"><i class="fas fa-book fa-md"></i> 7 list materi</span>
@@ -138,10 +132,7 @@
                                 <b><h3 class="product-name">{{$lev->title}}</h3></b>
                                 <div class="small m-t-xs">                                            
                                     <p style="color:black">{{str_limit($lev->description, $limit = 70, $end = '...')}}</p> 
-                                </div>                                   
-                                <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;">Laravel </span>
-                                <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;">Laravel </span>
-                                <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;">Laravel </span>                                 
+                                </div>                                                                   
                                     <div class="row">
                                         <div class="col-xs-6">
                                                 <span class="badge " style="padding:5px;"><i class="fas fa-book fa-md"></i> 7 list materi</span>

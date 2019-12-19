@@ -99,7 +99,20 @@
                                                     <?php endif; ?>
                                                 </select>
                                         </div>
-                                    </div>                                     
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ins_url" >Tag</label>                                    
+                                        <select name="tag[]" id="tag" data-placeholder="Pilih tag..." multiple class="form-control">
+                                            <?php $__empty_1 = true; $__currentLoopData = $tag; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tags): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                            <option value="<?php echo $tags->id; ?>"><?php echo $tags->title; ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                            <option value="" disabled>Tag Belum Dibuat</option>
+                                            <?php endif; ?>                                      
+                                          </select>
+                                        <span class="text-danger">
+                                            <strong id="url-error"></strong>
+                                        </span>
+                                </div>                                                                 
                             </div>        
                             <label> <input type="checkbox" name="published" class="i-checks" id="ins_published" value="0"> Diterbitkan </label>
                             <input type="hidden" class="i-checks" name="checked" id="checked" value="0"></label>                                                                                                                    
@@ -180,7 +193,20 @@
                                                     <?php endif; ?>
                                                 </select>
                                         </div>
-                                    </div>                                     
+                                    </div> 
+                                    <div class="form-group">
+                                        <label for="upd_url" >Tag</label>                                    
+                                        <select name="tag[]" id="upd_tag" data-placeholder="Pilih tag..." multiple class="form-control">
+                                            <?php $__empty_1 = true; $__currentLoopData = $tag; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tags): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                            <option value="<?php echo $tags->id; ?>"><?php echo $tags->title; ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                            <option value="" disabled>Tag Belum Dibuat</option>
+                                            <?php endif; ?>                                      
+                                          </select>
+                                        <span class="text-danger">
+                                            <strong id="url-error"></strong>
+                                        </span>
+                                </div>                                                                
                         </div>                         
                         <label> <input type="checkbox" name="published" class="i-checks" id="upd_published" value="0"> Diterbitkan </label>
                         <input type="text" class="i-checks" name="checked" id="upd_checked" value="0"></label>                                                                                                                                             
@@ -223,6 +249,8 @@
                 }                
             };        
 
+            $('#tag').chosen({width: "100%"});
+            $('#upd_tag').chosen({width: "100%"});
             // form tambah
             $( "#form_insert_course" ).validate({
                 rules: {
@@ -392,6 +420,15 @@
                             $('input[name="published"]').prop('checked', false);    
                         }
                         $('#upd_checked').val(data.list.published);
+                        
+                        var tags = data.list.tags;                                                
+                        var tagarr=[];
+                        tags.forEach(tag => {
+                            tagarr.push(tag.id);                            
+                        });
+                        
+                        $("#upd_tag").val(tagarr).trigger("chosen:updated");                        
+
                         $('#update_course').modal('show');
                     },
                     error: function (xhr, status, error) {

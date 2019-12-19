@@ -29,8 +29,8 @@
                     Download
                 </h3>
                 <br>                                
-                <a class="btn btn-danger btn-rounded btn-block" href="#"><i class="fas fa-file-code"></i> Materi</a>                
-                <a class="btn btn-danger btn-rounded btn-block" href="#"><i class="fas fa-file-code"></i> Source Code</a>                
+                <a class="btn btn-danger btn-rounded btn-block" href="{{$materi->materi}}" download><i class="fas fa-file-code"></i> Materi</a>                
+                <a class="btn btn-danger btn-rounded btn-block" href="{{$materi->source_code}}" download=""><i class="fas fa-file-code"></i> Source Code</a>                
                     
              </div>
         </div>        

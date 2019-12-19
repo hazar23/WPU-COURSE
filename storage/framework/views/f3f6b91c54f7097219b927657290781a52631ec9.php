@@ -63,7 +63,7 @@
         <div class="row">            
             <?php $__currentLoopData = $terbaru; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ter): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="col-md-3">
-                    <a href="">
+                    <a class="list" data-id="<?php echo e($ter->id); ?>" href="#">
                         <div class="ibox">
                             <div class="ibox-content product-box">                                        
                                 <div class="product-imitation">
@@ -73,10 +73,10 @@
                                 <b><h3 class="product-name"><?php echo e($ter->title); ?></h3></b>
                                     <div class="small m-t-xs">                                            
                                        <p style="color:black"><?php echo e(str_limit($ter->description, $limit = 70, $end = '...')); ?></p> 
-                                    </div>                                   
-                                    <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;">Laravel </span>
-                                    <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;">Laravel </span>
-                                    <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;">Laravel </span>                                 
+                                    </div>
+                                    <?php $__currentLoopData = $ter->tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;"><?php echo e($item->title); ?> </span>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                                                                                                           
                                         <div class="row">
                                             <div class="col-xs-6">
                                                     <span class="badge " style="padding:5px;"><i class="fas fa-book fa-md"></i> 7 list materi</span>
@@ -93,7 +93,7 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                        
         </div>
         <p>
-            <a class="btn btn-lg btn-primary" href="#" role="button">Lihat Selengkapnya</a>   
+            <a class="btn btn-lg btn-primary" href="<?php echo e(route('all')); ?>" role="button">Lihat Selengkapnya</a>   
         </p>
     </div>    
 </section>

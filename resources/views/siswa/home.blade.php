@@ -64,7 +64,7 @@
         <div class="row">            
             @foreach ($terbaru as $ter)
             <div class="col-md-3">
-                    <a href="">
+                    <a class="list" data-id="{{$ter->id}}" href="#">
                         <div class="ibox">
                             <div class="ibox-content product-box">                                        
                                 <div class="product-imitation">
@@ -74,10 +74,10 @@
                                 <b><h3 class="product-name">{{$ter->title}}</h3></b>
                                     <div class="small m-t-xs">                                            
                                        <p style="color:black">{{str_limit($ter->description, $limit = 70, $end = '...')}}</p> 
-                                    </div>                                   
-                                    <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;">Laravel </span>
-                                    <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;">Laravel </span>
-                                    <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;">Laravel </span>                                 
+                                    </div>
+                                    @foreach ($ter->tags as $item)
+                                    <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;">{{$item->title}} </span>
+                                    @endforeach                                                                                                           
                                         <div class="row">
                                             <div class="col-xs-6">
                                                     <span class="badge " style="padding:5px;"><i class="fas fa-book fa-md"></i> 7 list materi</span>
@@ -94,7 +94,7 @@
             @endforeach                        
         </div>
         <p>
-            <a class="btn btn-lg btn-primary" href="#" role="button">Lihat Selengkapnya</a>   
+            <a class="btn btn-lg btn-primary" href="{{ route('all') }}" role="button">Lihat Selengkapnya</a>   
         </p>
     </div>    
 </section>

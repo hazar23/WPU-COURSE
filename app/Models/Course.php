@@ -39,4 +39,8 @@ class Course extends Model
     {
         return $this->hasOne('App\Models\Course', 'course_id', 'id');
     }
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\Tag','course_tag')->withTimestamps();
+    } 
 }

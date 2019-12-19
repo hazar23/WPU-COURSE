@@ -36,7 +36,7 @@
         <div class="row">
                 @foreach ($list as $lists)
                 <div class="col-md-3">
-                    <a id="list" data-id="{{$lists->id}}" href="#">
+                    <a class="list" data-id="{{$lists->id}}" href="#">
                             <div class="ibox">
                                 <div class="ibox-content product-box">                                        
                                     <div class="product-imitation">
@@ -47,9 +47,9 @@
                                         <div class="small m-t-xs">                                            
                                            <p style="color:black">{{str_limit($lists->description, $limit = 70, $end = '...')}}</p> 
                                         </div>                                   
-                                        <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;">Laravel </span>
-                                        <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;">Laravel </span>
-                                        <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;">Laravel </span>                                 
+                                            @foreach ($lists->tags as $item)
+                                            <span class="badge badge-primary" style="padding:5px; margin:7px 0px 7px 0px;">{{$item->title}} </span>
+                                            @endforeach                                                                                                           
                                             <div class="row">
                                                 <div class="col-xs-6">
                                                         <span class="badge " style="padding:5px;"><i class="fas fa-book fa-md"></i> 7 list materi</span>
@@ -75,11 +75,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>        
 <script>
 $(document).ready(function(){        
-    $("#list").click(function (e) {                
+    $(".list").click(function (e) {                
                     e.preventDefault();                           
                     // var form = $('#form-masuk').serialize();                                        
-                    var id = $(this).attr("data-id");
-                    
+                    var id = $(this).attr("data-id");                    
                     $.ajax({
                         headers: {
                             "X-CSRF-TOKEN": "{{ csrf_token() }}",

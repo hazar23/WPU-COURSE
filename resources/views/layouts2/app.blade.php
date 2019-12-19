@@ -52,6 +52,42 @@
 <script src="{!! asset('js/plugins/pace.min.js') !!}"></script>
 <script src="{!! asset('js/plugins/wow.min.js') !!}"></script>
 <script>
+        $(document).ready(function(){        
+            $(".list").click(function (e) {                
+                e.preventDefault();                           
+                // var form = $('#form-masuk').serialize();                                        
+                var id = $(this).attr("data-id");                    
+                $.ajax({
+                    headers: {
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                    },
+                    url: "{{ URL('/materi') }}",
+                    type: "GET",
+                    data: "id="+ id,
+                    dataType: 'json',
+                    success: function (data) {                        
+                        if (data.status == 404) {                                                            
+                            $('#masuk').modal('show');
+                        }else{
+                            document.location.assign("{{ URL('materi/view') }}"+id);     
+                        }  
+                        
+                        
+                    },
+                    error: function (resp) {
+                        if (_.has(resp.responseJSON, 'errors')) {
+                            _.map(resp.responseJSON.errors, function (val, key) {
+                                $('#' + key + '-error').html(val[0]).fadeIn(1000).fadeOut(5000);
+                            })
+                        }
+                        alert(resp.responseJSON.message)
+                    }
+                });
+            });
+
+        });
+        </script>
+<script>
 
     $(document).ready(function () {
 

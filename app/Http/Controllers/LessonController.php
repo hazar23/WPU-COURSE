@@ -85,6 +85,7 @@ class LessonController extends Controller
             
             $materiName =time().'.'.$materi->getClientOriginalExtension();
             $materi->move(public_path('file'), $materiName);
+
             $scodeName =time().'.'.$source_code->getClientOriginalExtension();
             $source_code->move(public_path('file'), $scodeName);
             
@@ -95,7 +96,7 @@ class LessonController extends Controller
                 "video_link" => $video_link,
                 "content" => $content,
                 "position" => $position,
-                "materi" => $fileName,
+                "materi" => $materiName,
                 "source_code" => $scodeName,
                 "published" => $published   
             ];
@@ -182,12 +183,12 @@ class LessonController extends Controller
         $source_code = $request->source_code;
         $content = $request->content;
         $published = $request->checked;        
-        
+                
         
         if ($course_title == null || $title == null || $content == null) {
             return response()->json(['status' => 400, 'msg' => "Maaf, inputan tidak boleh kosong."]);
           
-        }else if ($maeri != null) {
+        }else if ($materi != null) {
 
             $course = Course::where('title',$course_title)->first();
             $lesson = Lesson::where('id',$id)->first();
